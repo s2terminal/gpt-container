@@ -1,9 +1,12 @@
+from os import environ
+from pathlib import Path
+
 import torch
 from transformers import T5Tokenizer, AutoModelForCausalLM
 
 class Generator():
     def __init__(self) -> None:
-        pretrained = "rinna/japanese-gpt2-xsmall"
+        pretrained = Path(environ["DOWNLOAD_PATH"]).expanduser()
         self.tokenizer = T5Tokenizer.from_pretrained(pretrained)
         self.model = AutoModelForCausalLM.from_pretrained(pretrained)
 
