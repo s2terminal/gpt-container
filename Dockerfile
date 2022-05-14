@@ -23,4 +23,7 @@ ENV DOWNLOAD_PATH="~/model"
 COPY src/download.py ./
 RUN poetry run python download.py
 
-CMD poetry run streamlit run src/gpt_container/streamlit.py --server.address 0.0.0.0 --server.port $PORT
+COPY src/ ./src/
+
+# see https://cloud.google.com/run/docs/issues#home
+CMD HOME=/root poetry run streamlit run src/gpt_container/streamlit.py --server.address 0.0.0.0 --server.port $PORT
