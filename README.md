@@ -4,4 +4,4 @@
 $ docker compose up
 ```
 
-access localhost:8080
+access localhost:8000

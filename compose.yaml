@@ -3,6 +3,7 @@ services:
     build: .
     volumes:
       - .:/app
-    command: "poetry run streamlit run src/gpt_container/streamlit.py --server.port 8080"
+    environment:
+     - PORT=8000
     ports:
-      - 8080:8080
+      - 8000:8000
