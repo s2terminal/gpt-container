@@ -7,6 +7,9 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 streamlit = "^1.9.0"
+transformers = "^4.19.1"
+sentencepiece = "^0.1.96"
+torch = "^1.11.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
