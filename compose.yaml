@@ -7,3 +7,12 @@ services:
      - PORT=8000
     ports:
       - 8000:8000
+  dash:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+     - PORT=8001
+    ports:
+      - 8001:8001
+    command: poetry run python src/gpt_container/dash_main.py
