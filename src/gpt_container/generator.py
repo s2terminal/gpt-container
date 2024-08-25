@@ -2,12 +2,12 @@ from os import environ
 from pathlib import Path
 
 import torch
-from transformers import T5Tokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
 class Generator():
     def __init__(self) -> None:
         pretrained = Path(environ["DOWNLOAD_PATH"]).expanduser()
-        self.tokenizer = T5Tokenizer.from_pretrained(pretrained)
+        self.tokenizer = AutoTokenizer.from_pretrained(pretrained)
         self.model = AutoModelForCausalLM.from_pretrained(pretrained)
 
     def generate(self, input_text: str, max_length: int=200):
@@ -17,12 +17,7 @@ class Generator():
             output_ids = self.model.generate(
                 token_ids.to(self.model.device),
                 max_length=max_length,
-                do_sample=True,
-                top_k=500,
-                top_p=0.95,
-                pad_token_id=self.tokenizer.pad_token_id,
-                bos_token_id=self.tokenizer.bos_token_id,
-                eos_token_id=self.tokenizer.eos_token_id,
-                bad_word_ids=[[self.tokenizer.unk_token_id]]
+                max_new_tokens=128,
+                repetition_penalty=1.1,
             )
         return self.tokenizer.decode(output_ids.tolist()[0])
