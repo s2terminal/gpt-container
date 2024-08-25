@@ -17,7 +17,7 @@ COPY poetry.lock ./
 RUN poetry install
 
 # モデルのダウンロード
-ENV DOWNLOAD_REPO_ID="rinna/japanese-gpt2-xsmall"
+ENV DOWNLOAD_REPO_ID="stockmark/gpt-neox-japanese-1.4b"
 ENV DOWNLOAD_PATH="~/model"
 COPY src/download.py ./
 RUN poetry run python download.py
