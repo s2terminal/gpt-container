@@ -27,5 +27,8 @@ COPY src/ ./src/
 ENV TRANSFORMERS_OFFLINE=1
 ENV HF_HUB_OFFLINE=1
 
+# see https://cloud.google.com/run/docs/configuring/services/gpu?hl=ja#libraries
+ENV LD_LIBRARY_PATH /usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
+
 # see https://cloud.google.com/run/docs/issues#home
 CMD HOME=/root poetry run streamlit run src/gpt_container/streamlit.py --server.address 0.0.0.0 --server.port $PORT
